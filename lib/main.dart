@@ -1,14 +1,16 @@
+import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:run/bikeGame.dart';
+
 
 void main() {
-  runApp(GameWidget(game: MyGame()));
+  WidgetsFlutterBinding.ensureInitialized();
+  Flame.device.fullScreen();
+  Flame.device.setLandscape();
+  MyGame game=MyGame();
+  runApp(GameWidget(game: game));
 }
 
-class MyGame extends FlameGame {
-  @override
-  Color backgroundColor() => Color.fromARGB(255, 13, 72, 121);
-  Future<void> onLoad() async {}
-  @override
-  void update(double dt) {}
-}
+
+
