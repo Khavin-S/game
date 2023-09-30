@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
+import 'package:run/Buttons/gearupbutton.dart';
 import 'package:run/bikegame.dart';
 import 'package:run/track.dart';
 
@@ -38,8 +39,13 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
   }
 
   void onAccelerate() {
+    if(GearUpButton.gear==1){
     bike.animation = characterWalkRightAnimation;
-    Track.track1.baseVelocity.x++;
+    if(Track.track1.baseVelocity.x<500){
+      Track.track1.baseVelocity.x++;
+      print(Track.track1.baseVelocity.x);
+    }
+    }
   }
 
   void onBreak() {
