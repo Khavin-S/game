@@ -47,7 +47,7 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame>{
 
   void onBreak(){
       if(Track.track1.baseVelocity.x>0){
-          Track.track1.baseVelocity.x=Track.track1.baseVelocity.x-4;
+          Track.track1.baseVelocity.x=Track.track1.baseVelocity.x-20;
           if(Track.track1.baseVelocity.x==0){
                     bike.animation=characterIdleAnimation;
           }
