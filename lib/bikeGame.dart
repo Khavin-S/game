@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:run/bike.dart';
-import 'package:run/buttons/button1.dart';
-import 'package:run/buttons/button2.dart';
+import 'package:run/button1.dart';
+import 'package:run/button2.dart';
 
 import 'package:run/track.dart';
 
