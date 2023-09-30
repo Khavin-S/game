@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
-import 'package:run/Buttons/gearupbutton.dart';
 import 'package:run/bikegame.dart';
 import 'package:run/track.dart';
 
@@ -18,6 +17,8 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
   late double screenHeight = gameRef.size.y;
 
   static double speed = .2;
+    static int gear=0;
+
 
   @override
   Future<void> onLoad() async {
@@ -38,8 +39,47 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
     add(bike);
   }
 
-  void onAccelerate() {
-    if(GearUpButton.gear==1){
+void onAccelerate() {
+switch(gear){
+  case 1:
+
+      bike.animation = characterWalkRightAnimation;
+      if(Track.track1.baseVelocity.x<500){
+      Track.track1.baseVelocity.x++;
+      print( "gear = $gear speed = ${Track.track1.baseVelocity.x}");
+    }
+    break;
+  case 2:
+        bike.animation = characterWalkRightAnimation;
+      if(Track.track1.baseVelocity.x<1000){
+      Track.track1.baseVelocity.x++;
+      print( "gear = $gear speed = ${Track.track1.baseVelocity.x}");
+    }
+    break;
+  case 3:
+        bike.animation = characterWalkRightAnimation;
+      if(Track.track1.baseVelocity.x<1500){
+      Track.track1.baseVelocity.x++;
+      print( "gear = $gear speed = ${Track.track1.baseVelocity.x}");
+    }
+    break;
+  case 4:
+        bike.animation = characterWalkRightAnimation;
+      if(Track.track1.baseVelocity.x<2000){
+      Track.track1.baseVelocity.x++;
+      print( "gear = $gear speed = ${Track.track1.baseVelocity.x}");
+    }
+    break;
+  case 5:
+        bike.animation = characterWalkRightAnimation;
+      if(Track.track1.baseVelocity.x<2500){
+      Track.track1.baseVelocity.x++;
+      print( "gear = $gear speed = ${Track.track1.baseVelocity.x}");
+    }
+    break;
+}
+
+    if(gear==1){
     bike.animation = characterWalkRightAnimation;
     if(Track.track1.baseVelocity.x<500){
       Track.track1.baseVelocity.x++;
@@ -60,7 +100,7 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
     }
   }
 
-//if no button is touched after bike moves it will gradually reduce its speed untill the speed becomes 0
+//if no button is touched after bike moves it will gradually reduce its speed until the speed becomes 0
   void onRelease() {
     if (Track.track1.baseVelocity.x > 0) {
       Track.track1.baseVelocity.x--;
@@ -68,5 +108,20 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
         bike.animation = characterIdleAnimation;
       }
     }
+  }
+
+//bike gear
+    void gearDown(){
+    if(gear>0) {
+      gear--;
+    }
+    print(gear);
+  }
+
+    void gearUp(){
+    if(gear<5){
+    gear+=1;
+    }
+    print(gear);
   }
 }

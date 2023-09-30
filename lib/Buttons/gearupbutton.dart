@@ -3,10 +3,10 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
+import 'package:run/bike.dart';
 import 'package:run/controller.dart';
 
 class GearUpButton extends Button with TapCallbacks{
-  static int gear=0;
   static bool gearUpButtonIsTapped = false; //gearButtonComponent tap notifier
   late SpriteAnimation gearUpButtonAnimation; //declaring button
   late SpriteAnimationComponent gearUpButtonComponent; //declaring variable for component(specific image from spritesheet)
@@ -26,15 +26,7 @@ class GearUpButton extends Button with TapCallbacks{
 
     @override
   void onTapDown(TapDownEvent event) {
-    gearUp();
+    Bike().gearUp();
     super.onTapDown(event);
   }
-
-  void gearUp(){
-    if(gear<5){
-    gear+=1;
-    }
-    print(gear);
-  }
-
 }

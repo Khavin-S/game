@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
-import 'package:run/Buttons/gearupbutton.dart';
+import 'package:run/bike.dart';
 import 'package:run/controller.dart';
 
 
@@ -29,14 +29,9 @@ class GearDownButton extends Button with TapCallbacks{
 
       @override
   void onTapDown(TapDownEvent event) {
-    gearDown();
+      Bike().gearDown();
       super.onTapDown(event);
   }
 
-  void gearDown(){
-    if(GearUpButton.gear>0) {
-      GearUpButton.gear--;
-    }
-    print(GearUpButton.gear);
-  }
+
 }
