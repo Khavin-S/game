@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
 import 'package:run/bikegame.dart';
+import 'package:run/button1.dart';
 import 'package:run/buttons/button1.dart';
 
 class Button2 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
