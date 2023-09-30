@@ -16,7 +16,7 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
   late double screenWidth = gameRef.size.x;
   late double screenHeight = gameRef.size.y;
 
-  static double speed = .2;
+  late double speed ;
   static int gear = 0;
 
   @override
@@ -29,7 +29,7 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
     characterIdleAnimation =
         spriteSheet.createAnimation(row: 0, stepTime: .1, to: 1);
     characterWalkRightAnimation =
-        spriteSheet.createAnimation(row: 1, stepTime: speed, to: 3);
+        spriteSheet.createAnimation(row: 1, stepTime: .2, to: 3);
     //adding animation to be displayed
     bike = SpriteAnimationComponent()
       ..animation = characterIdleAnimation
@@ -38,41 +38,54 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
     add(bike);
   }
 
+  @override
+  void update(double dt) {
+    super.update(dt);
+    /*speed = (Track.track1.baseVelocity.x/2500)*140;
+    print("gear = $gear speed = $speed");*/
+    print("gear = $gear speed = ${Track.track1.baseVelocity.x}");
+  }
+
   void onAccelerate() {
     switch (gear) {
+        case 0:
+        if (Track.track1.baseVelocity.x > 0) {
+          Track.track1.baseVelocity.x--;
+          bike.animation=characterWalkRightAnimation;
+        }
+        else{
+          bike.animation=characterIdleAnimation;
+
+        }
+        break;
       case 1:
         bike.animation = characterWalkRightAnimation;
         if (Track.track1.baseVelocity.x < 500) {
           Track.track1.baseVelocity.x++;
-          print("gear = $gear speed = ${Track.track1.baseVelocity.x}");
         }
         break;
       case 2:
         bike.animation = characterWalkRightAnimation;
         if (Track.track1.baseVelocity.x < 1000) {
           Track.track1.baseVelocity.x++;
-          print("gear = $gear speed = ${Track.track1.baseVelocity.x}");
         }
         break;
       case 3:
         bike.animation = characterWalkRightAnimation;
         if (Track.track1.baseVelocity.x < 1500) {
           Track.track1.baseVelocity.x++;
-          print("gear = $gear speed = ${Track.track1.baseVelocity.x}");
         }
         break;
       case 4:
         bike.animation = characterWalkRightAnimation;
         if (Track.track1.baseVelocity.x < 2000) {
           Track.track1.baseVelocity.x++;
-          print("gear = $gear speed = ${Track.track1.baseVelocity.x}");
         }
         break;
       case 5:
         bike.animation = characterWalkRightAnimation;
         if (Track.track1.baseVelocity.x < 2500) {
           Track.track1.baseVelocity.x++;
-          print("gear = $gear speed = ${Track.track1.baseVelocity.x}");
         }
         break;
     }

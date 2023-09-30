@@ -19,7 +19,7 @@ class GearDownButton extends Controller with TapCallbacks{
         srcSize: Vector2(36, 36));
 
     gearDownButtonAnimation =
-        spriteSheet.createAnimation(row: 4, stepTime: .1, to: 1);
+        spriteSheet.createAnimation(row: 4, stepTime: .1, from: 1,to: 2);
     gearDownButtonComponent = SpriteAnimationComponent()
       ..animation = gearDownButtonAnimation
       ..size = Vector2(120, 100);

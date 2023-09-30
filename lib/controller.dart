@@ -8,10 +8,12 @@ import 'package:run/Buttons/breakbutton.dart';
 
 class Controller extends SpriteAnimationComponent with HasGameRef<MyGame> {
   late SpriteSheet spriteSheet; //declaring spritesheet variable
+     double screenHeight=0;
+     double screenWidth=0;
   @override
   Future<void> onLoad() async {
-    double screenWidth = gameRef.size.x;
-    double screenHeight = gameRef.size.y;
+  double screenHeight = gameRef.size.y;
+   double screenWidth = gameRef.size.x;
     add(AccelerationButton()
       ..size = Vector2(120, 100)
       ..position = Vector2(screenWidth - 200, screenHeight - 250));
@@ -20,9 +22,9 @@ class Controller extends SpriteAnimationComponent with HasGameRef<MyGame> {
       ..position = Vector2(screenWidth - 200, screenHeight - 150));
     add(GearUpButton()
           ..size = Vector2(120, 100)
-      ..position = Vector2(200, screenHeight-250));
+      ..position = Vector2(200-120, screenHeight-250));
     add(GearDownButton()
               ..size = Vector2(120, 100)
-      ..position = Vector2(200, screenHeight-150));
+      ..position = Vector2(200-120, screenHeight-150));
   }
 }
