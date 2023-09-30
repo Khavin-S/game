@@ -5,7 +5,6 @@ import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
 import 'package:run/bikegame.dart';
-import 'package:run/button1.dart';
 
 class Button2 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
   
@@ -13,6 +12,8 @@ class Button2 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGa
   late SpriteSheet spriteSheet;
   late SpriteAnimationComponent button2;
   late SpriteAnimation breakButton;
+  bool button_2_istapped=false; //gas_button tap notifier
+
 
   @override
   Future<void> onLoad() async{
@@ -36,15 +37,24 @@ class Button2 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGa
   @override
   void update(double dt) {
     super.update(dt);
-    if(!Button1.isTapped){
-      Bike().onStop();
+    if(button_2_istapped){
+      Bike().onBreak();
     }
   }
   
+//Acceleration Button tap Event
 @override
   void onTapDown(TapDownEvent event) {
-    Button1.isTapped=false;
+    button_2_istapped=true;
     super.onTapDown(event);
+  }
+  @override
+  void onTapUp(TapUpEvent  event) {
+    button_2_istapped=false;
+  }
+    @override
+  void onTapCancel(TapCancelEvent event) {
+    button_2_istapped = false;
   }
 
 }

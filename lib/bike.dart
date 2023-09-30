@@ -6,6 +6,8 @@ import 'package:run/bikegame.dart';
 import 'package:run/track.dart';
 
 class Bike extends SpriteAnimationComponent with HasGameRef<MyGame>{
+
+
   
   late SpriteSheet spriteSheet;
   //sprite component with animation
@@ -17,6 +19,8 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame>{
   late double screenWidth=gameRef.size.x;
   late double screenHeight=gameRef.size.y;
 
+  static double speed=.2;
+
 
   @override
   Future<void> onLoad() async{
@@ -25,8 +29,8 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame>{
      spriteSheet = SpriteSheet(
     image: await Flame.images.load('finalsprite.png'), srcSize: Vector2(36, 36));
     //loading a specific movement animation from spritesheet
-     characterIdleAnimation=spriteSheet.createAnimation(row: 0, stepTime: .1, to: 1);
-    characterWalkRightAnimation = spriteSheet.createAnimation(row: 1, stepTime: .15, to: 3);
+     characterIdleAnimation=spriteSheet.createAnimation(row: 0, stepTime: .5, to: 1);
+    characterWalkRightAnimation = spriteSheet.createAnimation(row: 1, stepTime: speed, to: 3);
     //adding animation to be displayed
     bike = SpriteAnimationComponent()
       ..animation = characterIdleAnimation
@@ -34,19 +38,34 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame>{
             ..position = Vector2(screenWidth/2-60,screenHeight/2-50);
       add(bike);
   }
-  @override
-  void update(double dt) {
-        super.update(dt);
+
+
+  void onAccelerate(){
+     bike.animation=characterWalkRightAnimation;
+      Track.track1.baseVelocity.x++;
+  }
+
+  void onBreak(){
+      if(Track.track1.baseVelocity.x>0){
+          Track.track1.baseVelocity.x=Track.track1.baseVelocity.x-20;
+          if(Track.track1.baseVelocity.x==0){
+                    bike.animation=characterIdleAnimation;
+          }
+    }
+  }
+
+
+//if no button is touched after bike moves it will gradually reduce its speed untill the speed becomes 0
+  void onRelease(){
+    if(Track.track1.baseVelocity.x>0){
+          Track.track1.baseVelocity.x--;
+          if(Track.track1.baseVelocity.x==0){
+                    bike.animation=characterIdleAnimation;
+
+          }
+    }
 
   }
 
-  void onMove(){
-      bike.animation=characterWalkRightAnimation;
-      Track.track1.baseVelocity.x=100;
-  }
-  void onStop(){
-        bike.animation=characterIdleAnimation;
-        Track.track1.baseVelocity.x=0;
-  }
 
 }
