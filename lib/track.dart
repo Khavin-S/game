@@ -8,12 +8,12 @@ class Track extends ParallaxComponent with TapCallbacks {
 
   @override
   FutureOr<void> onLoad() async {
-    track1= await gameRef.loadParallax(
+    track1 = await gameRef.loadParallax(
       [
         ParallaxImageData('sky.png'),
       ],
-      baseVelocity: Vector2(0, 0),      
+      baseVelocity: Vector2(0, 0),
     );
-  parallax=track1;
+    parallax = track1;
   }
 }
