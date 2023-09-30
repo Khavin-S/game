@@ -5,16 +5,14 @@ import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
 import 'package:run/bikegame.dart';
-import 'package:run/track.dart';
+import 'package:run/button1.dart';
 
-class Button extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
+class Button2 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
   
-  Button() : super(size: Vector2(120, 100));
 
-  static bool isTapped=false;
   late SpriteSheet spriteSheet;
-  late SpriteAnimationComponent button1;
-  late SpriteAnimation gas_button;
+  late SpriteAnimationComponent button2;
+  late SpriteAnimation break_button;
 
   @override
   Future<void> onLoad() async{
@@ -24,30 +22,28 @@ class Button extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGam
     image: await Flame.images.load('finalsprite.png'), srcSize: Vector2(36, 36));
 
     //loading a specific movement animation from spritesheet
-     gas_button=spriteSheet.createAnimation(row: 4, stepTime: .1, to: 1);
+     break_button=spriteSheet.createAnimation(row: 4, stepTime: .1, from: 1,to: 2);
 
 
     //adding animation to be displayed
-    button1 = SpriteAnimationComponent()
-      ..animation = gas_button
+    button2 = SpriteAnimationComponent()
+      ..animation = break_button
       ..size = Vector2(120, 100);
 
-      add(button1);
+      add(button2);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    if(isTapped){
-      Bike().onMove();
+    if(!Button1.isTapped){
+      Bike().onStop();
     }
-    else {
-Bike().onStop();    }
   }
   
 @override
   void onTapDown(TapDownEvent event) {
-    isTapped=!isTapped;
+    Button1.isTapped=false;
     super.onTapDown(event);
   }
 
