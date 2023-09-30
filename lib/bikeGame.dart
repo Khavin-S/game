@@ -16,11 +16,11 @@ class MyGame extends FlameGame with HasGameRef{
     add(Track());
     add(Bike());
            add(Button1()
-    ..size=Vector2(100, 100)
-    ..position=Vector2(screenWidth-250, screenHeight-300));
+    ..size=Vector2(120, 100)
+    ..position=Vector2(screenWidth-200, screenHeight-250));
     add(Button2()
-    ..size=Vector2(100, 100)
-    ..position=Vector2(screenWidth-250, screenHeight-200));
+    ..size=Vector2(120, 100)
+    ..position=Vector2(screenWidth-200, screenHeight-150));
 
   }
 }

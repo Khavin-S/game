@@ -5,17 +5,16 @@ import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
 import 'package:run/bikegame.dart';
-import 'package:run/button2.dart';
-import 'package:run/track.dart';
 
 
 
 
 class Button1 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
-  static bool isTapped=false;
-  late SpriteSheet spriteSheet;
-  late SpriteAnimationComponent button1;
-  late SpriteAnimation gas_button;
+  late SpriteSheet spriteSheet;  //declaring spritesheet variable
+  late SpriteAnimationComponent gas_button;  //declaring variable for component(specific image from spritesheet)
+  late SpriteAnimation gas_button_animation;//declaring button animation
+    static bool button_1_istapped=false; //gas_button tap notifier
+
 
   @override
   Future<void> onLoad() async{
@@ -25,29 +24,45 @@ class Button1 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGa
     image: await Flame.images.load('finalsprite.png'), srcSize: Vector2(36, 36));
 
     //loading a specific movement animation from spritesheet
-     gas_button=spriteSheet.createAnimation(row: 4, stepTime: .1, to: 1);
+     gas_button_animation=spriteSheet.createAnimation(row: 4, stepTime: .1, to: 1);
 
-
-    //adding animation to be displayed
-    button1 = SpriteAnimationComponent()
-      ..animation = gas_button
+    //adding animation to be displayed to button component 
+    gas_button = SpriteAnimationComponent()
+      ..animation = gas_button_animation
       ..size = Vector2(120, 100);
 
-      add(button1);
+      add(gas_button);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    if(isTapped){
-      Bike().onMove();
+    //checking whether the button is taapped
+    if(button_1_istapped){
+      //if tapped
+      Bike().onAccelerate();
+    }
+    else{
+      //if button released
+      Bike().onRelease();
     }
   }
   
+
+//Acceleration Button tap Event
 @override
   void onTapDown(TapDownEvent event) {
-    isTapped=true;
+    button_1_istapped=true;
     super.onTapDown(event);
   }
+  @override
+  void onTapUp(TapUpEvent  event) {
+    button_1_istapped=false;
+  }
+    @override
+  void onTapCancel(TapCancelEvent event) {
+    button_1_istapped = false;
+  }
+
 
 }
