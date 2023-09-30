@@ -26,7 +26,7 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
         srcSize: Vector2(36, 36));
     //loading a specific movement animation from spritesheet
     characterIdleAnimation =
-        spriteSheet.createAnimation(row: 0, stepTime: .5, to: 1);
+        spriteSheet.createAnimation(row: 0, stepTime: .1, to: 1);
     characterWalkRightAnimation =
         spriteSheet.createAnimation(row: 1, stepTime: speed, to: 3);
     //adding animation to be displayed
