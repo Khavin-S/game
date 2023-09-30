@@ -6,9 +6,6 @@ import 'package:run/bikegame.dart';
 import 'package:run/track.dart';
 
 class Bike extends SpriteAnimationComponent with HasGameRef<MyGame>{
-
-
-  
   late SpriteSheet spriteSheet;
   //sprite component with animation
   static late SpriteAnimationComponent bike;
@@ -47,10 +44,15 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame>{
 
   void onBreak(){
       if(Track.track1.baseVelocity.x>0){
-          Track.track1.baseVelocity.x=Track.track1.baseVelocity.x-20;
+          Track.track1.baseVelocity.x=Track.track1.baseVelocity.x-8;
           if(Track.track1.baseVelocity.x==0){
                     bike.animation=characterIdleAnimation;
           }
+    }
+    else{
+          Track.track1.baseVelocity.x=0;
+          bike.animation=characterIdleAnimation;
+
     }
   }
 
