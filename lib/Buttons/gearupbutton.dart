@@ -6,7 +6,7 @@ import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
 import 'package:run/controller.dart';
 
-class GearUpButton extends Button with TapCallbacks{
+class GearUpButton extends Controller with TapCallbacks{
   static bool gearUpButtonIsTapped = false; //gearButtonComponent tap notifier
   late SpriteAnimation gearUpButtonAnimation; //declaring button
   late SpriteAnimationComponent gearUpButtonComponent; //declaring variable for component(specific image from spritesheet)

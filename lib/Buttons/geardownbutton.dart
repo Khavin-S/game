@@ -6,7 +6,7 @@ import 'package:run/bike.dart';
 import 'package:run/controller.dart';
 
 
-class GearDownButton extends Button with TapCallbacks{
+class GearDownButton extends Controller with TapCallbacks{
 
    bool gearDownButtonIsTapped = false; //gearButtonComponent tap notifier
   late SpriteAnimation gearDownButtonAnimation; //declaring button

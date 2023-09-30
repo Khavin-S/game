@@ -10,6 +10,6 @@ class MyGame extends FlameGame{
   Future<void> onLoad() async{
     add(Track());
     add(Bike());
-    add(Button()); 
+    add(Controller()); 
   }
 }

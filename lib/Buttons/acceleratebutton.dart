@@ -6,7 +6,7 @@ import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
 import 'package:run/controller.dart';
 
-class AccelerationButton extends Button with TapCallbacks {
+class AccelerationButton extends Controller with TapCallbacks {
   static bool accelerationButtonIsTapped =
       false; //accelerationButtonComponent tap notifier
   late SpriteAnimation accelerationButtonAnimation; //declaring button
@@ -42,7 +42,7 @@ class AccelerationButton extends Button with TapCallbacks {
     }
   }
 
-//Acceleration Button tap Event
+//Acceleration Controller tap Event
   @override
   void onTapDown(TapDownEvent event) {
     accelerationButtonIsTapped = true;

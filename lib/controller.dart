@@ -6,7 +6,7 @@ import 'package:run/bikegame.dart';
 import 'package:run/Buttons/acceleratebutton.dart';
 import 'package:run/Buttons/breakbutton.dart';
 
-class Button extends SpriteAnimationComponent with HasGameRef<MyGame> {
+class Controller extends SpriteAnimationComponent with HasGameRef<MyGame> {
   late SpriteSheet spriteSheet; //declaring spritesheet variable
   @override
   Future<void> onLoad() async {
