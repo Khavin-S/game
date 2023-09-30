@@ -8,8 +8,8 @@ import 'package:run/track.dart';
 class MyGame extends FlameGame{
 @override
   Future<void> onLoad() async{
-    add(Track());
-    add(Bike());
-    add(Controller()); 
+    await add(Track());
+    await add(Bike());
+    await add(Controller()); 
   }
 }

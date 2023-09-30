@@ -14,16 +14,16 @@ class Controller extends SpriteAnimationComponent with HasGameRef<MyGame> {
   Future<void> onLoad() async {
   double screenHeight = gameRef.size.y;
    double screenWidth = gameRef.size.x;
-    add(AccelerationButton()
+    await add(AccelerationButton()
       ..size = Vector2(120, 100)
       ..position = Vector2(screenWidth - 200, screenHeight - 250));
-    add(BreakButton()
+    await add(BreakButton()
       ..size = Vector2(120, 100)
       ..position = Vector2(screenWidth - 200, screenHeight - 150));
-    add(GearUpButton()
+    await add(GearUpButton()
           ..size = Vector2(120, 100)
       ..position = Vector2(200-120, screenHeight-250));
-    add(GearDownButton()
+    await add(GearDownButton()
               ..size = Vector2(120, 100)
       ..position = Vector2(200-120, screenHeight-150));
   }
