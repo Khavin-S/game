@@ -4,40 +4,36 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
-import 'package:run/bikegame.dart';
+import 'package:run/button.dart';
 
-class Button2 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
+class Button2 extends Button with TapCallbacks{
   
 
-  late SpriteSheet spriteSheet;
-  late SpriteAnimationComponent button2;
-  late SpriteAnimation breakButton;
-  bool button_2_istapped=false; //gas_button tap notifier
+  bool breakButtonIsTapped=false; //gas_button tap notifier
+  late SpriteAnimation breakButtonAnimation;
+  late SpriteAnimationComponent breakButtonComponent;
 
 
   @override
   Future<void> onLoad() async{
-  
-    //loading spritesheet
+            //loading spritesheet
      spriteSheet = SpriteSheet(
     image: await Flame.images.load('finalsprite.png'), srcSize: Vector2(36, 36));
-
-    //loading a specific movement animation from spritesheet
-     breakButton=spriteSheet.createAnimation(row: 4, stepTime: .1, from: 1,to: 2);
-
-
+        //loading a specific movement animation from spritesheet
+     breakButtonAnimation=spriteSheet.createAnimation(row: 4, stepTime: .1, from: 1,to: 2);
+  
     //adding animation to be displayed
-    button2 = SpriteAnimationComponent()
-      ..animation = breakButton
+    breakButtonComponent = SpriteAnimationComponent()
+      ..animation = breakButtonAnimation
       ..size = Vector2(120, 100);
 
-      add(button2);
+      add(breakButtonComponent);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    if(button_2_istapped){
+    if(breakButtonIsTapped){
       Bike().onBreak();
     }
   }
@@ -45,16 +41,16 @@ class Button2 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGa
 //Acceleration Button tap Event
 @override
   void onTapDown(TapDownEvent event) {
-    button_2_istapped=true;
+    breakButtonIsTapped=true;
     super.onTapDown(event);
   }
   @override
   void onTapUp(TapUpEvent  event) {
-    button_2_istapped=false;
+    breakButtonIsTapped=false;
   }
     @override
   void onTapCancel(TapCancelEvent event) {
-    button_2_istapped = false;
+    breakButtonIsTapped = false;
   }
 
 }

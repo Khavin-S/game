@@ -1,27 +1,17 @@
 import 'dart:async';
-import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:run/bike.dart';
-import 'package:run/button1.dart';
-import 'package:run/button2.dart';
-
+import 'package:run/button.dart';
 import 'package:run/track.dart';
 
 
-class MyGame extends FlameGame with HasGameRef{
+class MyGame extends FlameGame{
 
 @override
   Future<void> onLoad() async{
-    double screenWidth=gameRef.size.x;
-    double screenHeight=gameRef.size.y;
+
     add(Track());
     add(Bike());
-           add(Button1()
-    ..size=Vector2(120, 100)
-    ..position=Vector2(screenWidth-200, screenHeight-250));
-    add(Button2()
-    ..size=Vector2(120, 100)
-    ..position=Vector2(screenWidth-200, screenHeight-150));
-
+    add(Button()); 
   }
 }

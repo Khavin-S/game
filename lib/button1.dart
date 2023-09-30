@@ -4,41 +4,33 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:run/bike.dart';
-import 'package:run/bikegame.dart';
+import 'package:run/button.dart';
 
 
-
-
-class Button1 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
-  late SpriteSheet spriteSheet;  //declaring spritesheet variable
-  late SpriteAnimationComponent gas_button;  //declaring variable for component(specific image from spritesheet)
-  late SpriteAnimation gas_button_animation;//declaring button animation
-    static bool button_1_istapped=false; //gas_button tap notifier
-
-
+class Button1 extends Button with TapCallbacks{
+    static bool accelerationButtonIsTapped=false; //accelerationButtonComponent tap notifier
+    late SpriteAnimation accelerationButtonAnimation;//declaring button 
+    late SpriteAnimationComponent accelerationButtonComponent;  //declaring variable for component(specific image from spritesheet)
   @override
   Future<void> onLoad() async{
-  
-    //loading spritesheet
+            //loading spritesheet
      spriteSheet = SpriteSheet(
     image: await Flame.images.load('finalsprite.png'), srcSize: Vector2(36, 36));
-
-    //loading a specific movement animation from spritesheet
-     gas_button_animation=spriteSheet.createAnimation(row: 4, stepTime: .1, to: 1);
-
+        //loading a specific movement animation from spritesheet
+     accelerationButtonAnimation=spriteSheet.createAnimation(row: 4, stepTime: .1, to: 1);
     //adding animation to be displayed to button component 
-    gas_button = SpriteAnimationComponent()
-      ..animation = gas_button_animation
+    accelerationButtonComponent = SpriteAnimationComponent()
+      ..animation = accelerationButtonAnimation
       ..size = Vector2(120, 100);
 
-      add(gas_button);
+      add(accelerationButtonComponent);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
     //checking whether the button is taapped
-    if(button_1_istapped){
+    if(accelerationButtonIsTapped){
       //if tapped
       Bike().onAccelerate();
     }
@@ -52,16 +44,16 @@ class Button1 extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGa
 //Acceleration Button tap Event
 @override
   void onTapDown(TapDownEvent event) {
-    button_1_istapped=true;
+    accelerationButtonIsTapped=true;
     super.onTapDown(event);
   }
   @override
   void onTapUp(TapUpEvent  event) {
-    button_1_istapped=false;
+    accelerationButtonIsTapped=false;
   }
     @override
   void onTapCancel(TapCancelEvent event) {
-    button_1_istapped = false;
+    accelerationButtonIsTapped = false;
   }
 
 
