@@ -16,6 +16,4 @@ class Track extends ParallaxComponent with TapCallbacks {
     );
   parallax=track1;
   }
-
-
 }

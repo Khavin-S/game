@@ -3,7 +3,8 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
-import 'package:run/bikeGame.dart';
+import 'package:run/bike.dart';
+import 'package:run/bikegame.dart';
 import 'package:run/track.dart';
 
 class Button extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGame>{
@@ -38,11 +39,10 @@ class Button extends SpriteAnimationComponent with TapCallbacks,HasGameRef<MyGam
   void update(double dt) {
     super.update(dt);
     if(isTapped){
-      Track.track1.baseVelocity.x=100;
+      Bike().onMove();
     }
     else {
-      Track.track1.baseVelocity.x=0;
-    }
+Bike().onStop();    }
   }
   
 @override
