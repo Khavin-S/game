@@ -6,25 +6,33 @@ import 'package:run/bike.dart';
 import 'package:run/track.dart';
 
 class ScoreBoard extends TextBoxComponent {
-   late TextComponent displayGear;
-   late TextComponent displaySpeed;
+  late TextComponent displayGear;
+  late TextComponent displaySpeed;
   @override
   Future<void> onLoad() async {
-   displayGear=TextComponent()
+    displayGear = TextComponent()
       ..text = "GEAR : ${Bike.gear.toString()}"
-      ..textRenderer = TextPaint(style: TextStyle(color: BasicPalette.black.color,fontSize: 20,fontWeight: FontWeight.bold));
+      ..textRenderer = TextPaint(
+          style: TextStyle(
+              color: BasicPalette.black.color,
+              fontSize: 20,
+              fontWeight: FontWeight.bold));
     add(displayGear);
-    displaySpeed=TextBoxComponent()
-      ..text ="SPEED : 0"
-      ..textRenderer = TextPaint(style: TextStyle(color: BasicPalette.black.color,fontSize: 20,fontWeight: FontWeight.bold))
-      ..position=Vector2(0,20);
+    displaySpeed = TextBoxComponent()
+      ..text = "SPEED : 0"
+      ..textRenderer = TextPaint(
+          style: TextStyle(
+              color: BasicPalette.black.color,
+              fontSize: 20,
+              fontWeight: FontWeight.bold))
+      ..position = Vector2(0, 20);
     add(displaySpeed);
-
   }
+
   @override
   void update(double dt) {
-    displayGear.text="GEAR : ${Bike.gear.toString()}";
-    displaySpeed.text="SPEED : ${Track.track1.baseVelocity.x.toString()}";
+    displayGear.text = "GEAR : ${Bike.gear.toString()}";
+    displaySpeed.text = "SPEED : ${Bike.speed.toString()}";
     super.update(dt);
   }
 }

@@ -6,44 +6,37 @@ import 'package:run/bikegame.dart';
 import 'package:run/track.dart';
 
 class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
-  late SpriteSheet spriteSheet;
-  //sprite component with animation
-  static late SpriteAnimationComponent bike;
-  //animation
-  static late SpriteAnimation characterWalkRightAnimation;
-  static late SpriteAnimation characterIdleAnimation;
-  //getting screen size
   late double screenWidth = gameRef.size.x;
   late double screenHeight = gameRef.size.y;
-
-  late double speed;
+  late SpriteSheet spriteSheet;
+  static late SpriteAnimation bikeMovingAnimation;
+  static late SpriteAnimation bikeIdleAnimation;
+  static late SpriteAnimationComponent bikeComponent;
+  static int speed = 0;
   static int gear = 0;
+  late double distanceTravelled = 0;
 
   @override
   Future<void> onLoad() async {
-    //loading spritesheet
     spriteSheet = SpriteSheet(
         image: await Flame.images.load('finalsprite.png'),
         srcSize: Vector2(36, 36));
-    //loading a specific movement animation from spritesheet
-    characterIdleAnimation =
+    bikeIdleAnimation =
         spriteSheet.createAnimation(row: 0, stepTime: .1, to: 1);
-    characterWalkRightAnimation =
+    bikeMovingAnimation =
         spriteSheet.createAnimation(row: 1, stepTime: .2, to: 3);
-    //adding animation to be displayed
-    bike = SpriteAnimationComponent()
-      ..animation = characterIdleAnimation
+    bikeComponent = SpriteAnimationComponent()
+      ..animation = bikeIdleAnimation
       ..size = Vector2(120, 100)
       ..position = Vector2(screenWidth / 2 - 60, screenHeight / 2 - 50);
-    add(bike);
+    add(bikeComponent);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    /*speed = (Track.track1.baseVelocity.x/2500)*140;
-    print("gear = $gear speed = $speed");*/
-    print("gear = $gear speed = ${Track.track1.baseVelocity.x}");
+    speed = ((Track.track1.baseVelocity.x / 2500) * 100).toInt();
+    print("gear = $gear speed = $speed");
   }
 
   void onAccelerate() {
@@ -51,19 +44,19 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
       case 0:
         if (Track.track1.baseVelocity.x > 0) {
           Track.track1.baseVelocity.x--;
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
         } else {
-          bike.animation = characterIdleAnimation;
+          bikeComponent.animation = bikeIdleAnimation;
         }
         break;
 
       case 1:
         //if speed is high than 1st gear
         if (Track.track1.baseVelocity.x > 500) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x = 500;
         } else {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           if (Track.track1.baseVelocity.x <= 500) {
             Track.track1.baseVelocity.x++;
           }
@@ -72,14 +65,14 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
 
       case 2:
         if (Track.track1.baseVelocity.x > 1000) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x = 1000;
         } else {
           if (Track.track1.baseVelocity.x < 500) {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             Track.track1.baseVelocity.x += 0.50;
           } else {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             if (Track.track1.baseVelocity.x < 1000) {
               Track.track1.baseVelocity.x++;
             }
@@ -90,18 +83,18 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
 
       case 3:
         if (Track.track1.baseVelocity.x > 1500) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x = 1500;
         } else {
           if (Track.track1.baseVelocity.x < 500) {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             Track.track1.baseVelocity.x += 0.25;
           } else if (Track.track1.baseVelocity.x >= 500 &&
               Track.track1.baseVelocity.x < 1000) {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             Track.track1.baseVelocity.x += 0.75;
           } else {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             if (Track.track1.baseVelocity.x < 1500) {
               Track.track1.baseVelocity.x++;
             }
@@ -112,22 +105,22 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
 
       case 4:
         if (Track.track1.baseVelocity.x > 2000) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x = 2000;
         } else {
           if (Track.track1.baseVelocity.x < 500) {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             Track.track1.baseVelocity.x += 0.15;
           } else if (Track.track1.baseVelocity.x >= 500 &&
               Track.track1.baseVelocity.x < 1000) {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             Track.track1.baseVelocity.x += 0.50;
           } else if (Track.track1.baseVelocity.x >= 1000 &&
               Track.track1.baseVelocity.x < 1500) {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             Track.track1.baseVelocity.x += 0.75;
           } else {
-            bike.animation = characterWalkRightAnimation;
+            bikeComponent.animation = bikeMovingAnimation;
             if (Track.track1.baseVelocity.x < 2000) {
               Track.track1.baseVelocity.x++;
             }
@@ -138,22 +131,22 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
 
       case 5:
         if (Track.track1.baseVelocity.x < 500) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x += 0.10;
         } else if (Track.track1.baseVelocity.x >= 500 &&
             Track.track1.baseVelocity.x < 1000) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x += 0.30;
         } else if (Track.track1.baseVelocity.x >= 1000 &&
             Track.track1.baseVelocity.x < 1500) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x += 0.50;
         } else if (Track.track1.baseVelocity.x >= 1500 &&
             Track.track1.baseVelocity.x < 2000) {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           Track.track1.baseVelocity.x += 0.75;
         } else {
-          bike.animation = characterWalkRightAnimation;
+          bikeComponent.animation = bikeMovingAnimation;
           if (Track.track1.baseVelocity.x < 2500) {
             Track.track1.baseVelocity.x++;
           }
@@ -167,28 +160,28 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
     if (Track.track1.baseVelocity.x > 0) {
       Track.track1.baseVelocity.x = Track.track1.baseVelocity.x - 8;
       if (Track.track1.baseVelocity.x == 0) {
-        bike.animation = characterIdleAnimation;
+        bikeComponent.animation = bikeIdleAnimation;
       }
     } else {
       Track.track1.baseVelocity.x = 0;
-      bike.animation = characterIdleAnimation;
+      bikeComponent.animation = bikeIdleAnimation;
     }
   }
 
-//if no button is touched after bike moves it will gradually reduce its speed until the speed becomes 0
+//if no button is touched after bikeComponent moves it will gradually reduce its speed until the speed becomes 0
   void onRelease() {
     if (Track.track1.baseVelocity.x > 0) {
       Track.track1.baseVelocity.x--;
       if (Track.track1.baseVelocity.x == 0) {
-        bike.animation = characterIdleAnimation;
+        bikeComponent.animation = bikeIdleAnimation;
       }
     } else {
       Track.track1.baseVelocity.x = 0;
-      bike.animation = characterIdleAnimation;
+      bikeComponent.animation = bikeIdleAnimation;
     }
   }
 
-//bike gear
+//bikeComponent gear
   void gearDown() {
     if (gear > 0) {
       gear--;
