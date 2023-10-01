@@ -16,7 +16,7 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
   late double screenWidth = gameRef.size.x;
   late double screenHeight = gameRef.size.y;
 
-  late double speed ;
+  late double speed;
   static int gear = 0;
 
   @override
@@ -48,106 +48,116 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
 
   void onAccelerate() {
     switch (gear) {
-        case 0:
+      case 0:
         if (Track.track1.baseVelocity.x > 0) {
           Track.track1.baseVelocity.x--;
-          bike.animation=characterWalkRightAnimation;
-        }
-        else{
-          bike.animation=characterIdleAnimation;
-        }
-        break;
-
-
-
-      case 1: 
-        bike.animation = characterWalkRightAnimation;
-        if (Track.track1.baseVelocity.x < 500) {
-          Track.track1.baseVelocity.x++;
+          bike.animation = characterWalkRightAnimation;
+        } else {
+          bike.animation = characterIdleAnimation;
         }
         break;
 
+      case 1:
+        //if speed is high than 1st gear
+        if (Track.track1.baseVelocity.x > 500) {
+          bike.animation = characterWalkRightAnimation;
+          Track.track1.baseVelocity.x = 500;
+        } else {
+          bike.animation = characterWalkRightAnimation;
+          if (Track.track1.baseVelocity.x <= 500) {
+            Track.track1.baseVelocity.x++;
+          }
+        }
+        break;
 
       case 2:
-      if(Track.track1.baseVelocity.x < 500){
-        bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.50;
-      }
-      else{
-        bike.animation = characterWalkRightAnimation;
-        if (Track.track1.baseVelocity.x < 1000) {
-          Track.track1.baseVelocity.x++;
+        if (Track.track1.baseVelocity.x > 1000) {
+          bike.animation = characterWalkRightAnimation;
+          Track.track1.baseVelocity.x = 1000;
+        } else {
+          if (Track.track1.baseVelocity.x < 500) {
+            bike.animation = characterWalkRightAnimation;
+            Track.track1.baseVelocity.x += 0.50;
+          } else {
+            bike.animation = characterWalkRightAnimation;
+            if (Track.track1.baseVelocity.x < 1000) {
+              Track.track1.baseVelocity.x++;
+            }
+          }
         }
-      }
+
         break;
-
-
 
       case 3:
-        if(Track.track1.baseVelocity.x < 500){
-        bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.25;
-      }
-      else if(Track.track1.baseVelocity.x >= 500 && Track.track1.baseVelocity.x < 1000){
+        if (Track.track1.baseVelocity.x > 1500) {
           bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.75;
-      }
-      else{
-        bike.animation = characterWalkRightAnimation;
-        if (Track.track1.baseVelocity.x < 1500) {
-          Track.track1.baseVelocity.x++;
+          Track.track1.baseVelocity.x = 1500;
+        } else {
+          if (Track.track1.baseVelocity.x < 500) {
+            bike.animation = characterWalkRightAnimation;
+            Track.track1.baseVelocity.x += 0.25;
+          } else if (Track.track1.baseVelocity.x >= 500 &&
+              Track.track1.baseVelocity.x < 1000) {
+            bike.animation = characterWalkRightAnimation;
+            Track.track1.baseVelocity.x += 0.75;
+          } else {
+            bike.animation = characterWalkRightAnimation;
+            if (Track.track1.baseVelocity.x < 1500) {
+              Track.track1.baseVelocity.x++;
+            }
+          }
         }
-      }
-      break;
 
-
-
+        break;
 
       case 4:
-      if(Track.track1.baseVelocity.x < 500){
-        bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.15;
-      }
-      else if(Track.track1.baseVelocity.x >= 500 && Track.track1.baseVelocity.x < 1000){
+        if (Track.track1.baseVelocity.x > 2000) {
           bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.50;
-      }
-            else if(Track.track1.baseVelocity.x >= 1000 && Track.track1.baseVelocity.x < 1500){
-          bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.75;
-      }
-      else{
-        bike.animation = characterWalkRightAnimation;
-        if (Track.track1.baseVelocity.x < 2000) {
-          Track.track1.baseVelocity.x++;
+          Track.track1.baseVelocity.x = 2000;
+        } else {
+          if (Track.track1.baseVelocity.x < 500) {
+            bike.animation = characterWalkRightAnimation;
+            Track.track1.baseVelocity.x += 0.15;
+          } else if (Track.track1.baseVelocity.x >= 500 &&
+              Track.track1.baseVelocity.x < 1000) {
+            bike.animation = characterWalkRightAnimation;
+            Track.track1.baseVelocity.x += 0.50;
+          } else if (Track.track1.baseVelocity.x >= 1000 &&
+              Track.track1.baseVelocity.x < 1500) {
+            bike.animation = characterWalkRightAnimation;
+            Track.track1.baseVelocity.x += 0.75;
+          } else {
+            bike.animation = characterWalkRightAnimation;
+            if (Track.track1.baseVelocity.x < 2000) {
+              Track.track1.baseVelocity.x++;
+            }
+          }
         }
-        break;
-      }
 
+        break;
 
       case 5:
-      if(Track.track1.baseVelocity.x < 500){
-        bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.10;
-      }
-      else if(Track.track1.baseVelocity.x >= 500 && Track.track1.baseVelocity.x < 1000){
+        if (Track.track1.baseVelocity.x < 500) {
           bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.30;
-      }
-      else if(Track.track1.baseVelocity.x >= 1000 && Track.track1.baseVelocity.x < 1500){
+          Track.track1.baseVelocity.x += 0.10;
+        } else if (Track.track1.baseVelocity.x >= 500 &&
+            Track.track1.baseVelocity.x < 1000) {
           bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.50;
-      }
-      else if(Track.track1.baseVelocity.x >= 1500 && Track.track1.baseVelocity.x < 2000){
+          Track.track1.baseVelocity.x += 0.30;
+        } else if (Track.track1.baseVelocity.x >= 1000 &&
+            Track.track1.baseVelocity.x < 1500) {
           bike.animation = characterWalkRightAnimation;
-         Track.track1.baseVelocity.x+=0.75;
-      }
-      else{
-        bike.animation = characterWalkRightAnimation;
-        if (Track.track1.baseVelocity.x < 2500) {
-          Track.track1.baseVelocity.x++;
+          Track.track1.baseVelocity.x += 0.50;
+        } else if (Track.track1.baseVelocity.x >= 1500 &&
+            Track.track1.baseVelocity.x < 2000) {
+          bike.animation = characterWalkRightAnimation;
+          Track.track1.baseVelocity.x += 0.75;
+        } else {
+          bike.animation = characterWalkRightAnimation;
+          if (Track.track1.baseVelocity.x < 2500) {
+            Track.track1.baseVelocity.x++;
+          }
         }
-      }
 
         break;
     }
@@ -167,18 +177,14 @@ class Bike extends SpriteAnimationComponent with HasGameRef<MyGame> {
 
 //if no button is touched after bike moves it will gradually reduce its speed until the speed becomes 0
   void onRelease() {
-    if (Track.track1.baseVelocity.x > 0) 
-    {
+    if (Track.track1.baseVelocity.x > 0) {
       Track.track1.baseVelocity.x--;
-      if (Track.track1.baseVelocity.x == 0) 
-      {
+      if (Track.track1.baseVelocity.x == 0) {
         bike.animation = characterIdleAnimation;
       }
-    }
-    else
-    {
-            Track.track1.baseVelocity.x=0;
-            bike.animation = characterIdleAnimation;
+    } else {
+      Track.track1.baseVelocity.x = 0;
+      bike.animation = characterIdleAnimation;
     }
   }
 
