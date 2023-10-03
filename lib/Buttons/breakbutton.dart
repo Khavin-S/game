@@ -3,41 +3,32 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
-import 'package:run/bike.dart';
+import 'package:run/bike1.dart';
 import 'package:run/controller.dart';
 
 class BreakButton extends Controller with TapCallbacks {
-  bool breakButtonIsTapped = false; //breakButtonComponent tap notifier
-  late SpriteAnimation breakButtonAnimation; //declaring break button animation
-  late SpriteAnimationComponent
-      breakButtonComponent; //declaring variable for component(specific image from spritesheet)
+  bool breakButtonIsTapped = false; 
+  late SpriteAnimation breakButtonAnimation; 
+  late SpriteAnimationComponent breakButtonComponent; 
 
   @override
   Future<void> onLoad() async {
-    //loading spritesheet
-    spriteSheet = SpriteSheet(
-        image: await Flame.images.load('finalsprite.png'),
-        srcSize: Vector2(36, 36));
-    //loading a break button animation from spritesheet
-    breakButtonAnimation =
-        spriteSheet.createAnimation(row: 4, stepTime: .1, from: 1, to: 2);
-    //adding break button animation to the component
+    spriteSheet = SpriteSheet(image: await Flame.images.load('finalsprite.png'),srcSize: Vector2(36, 36));
+    breakButtonAnimation = spriteSheet.createAnimation(row: 4, stepTime: .1, from: 1, to: 2);
     breakButtonComponent = SpriteAnimationComponent()
       ..animation = breakButtonAnimation
-      ..size = Vector2(120, 100); //component size to be displayed
+      ..size = Vector2(120, 100);
     add(breakButtonComponent);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
-    //checking is the button is tapped
     if (breakButtonIsTapped) {
-      Bike().onBreak(); //if tapped - apply break
+      Bike1().onBreak(dt);
     }
   }
 
-//Acceleration Controller tap Event
   @override
   void onTapDown(TapDownEvent event) {
     breakButtonIsTapped = true;
